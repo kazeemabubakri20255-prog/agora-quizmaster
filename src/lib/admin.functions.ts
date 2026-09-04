@@ -141,8 +141,9 @@ export const saveQuiz = createServerFn({ method: "POST" })
   .inputValidator((raw) => quizInput.parse(raw))
   .handler(async ({ data, context }) => {
     const db = await requireAdmin(context);
+    const { id: _quizId, ...fields } = data;
     const payload = {
-      ...data,
+      ...fields,
       description: data.description ?? null,
       whatsapp_url: data.whatsapp_url || null,
     };
@@ -230,8 +231,9 @@ export const saveQuestion = createServerFn({ method: "POST" })
   .inputValidator((raw) => questionInput.parse(raw))
   .handler(async ({ data, context }) => {
     const db = await requireAdmin(context);
+    const { id: _questionId, ...qfields } = data;
     const payload = {
-      ...data,
+      ...qfields,
       explanation: data.explanation ?? null,
       topic: data.topic ?? null,
       subtopic: data.subtopic ?? null,
