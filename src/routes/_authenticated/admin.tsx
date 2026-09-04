@@ -13,6 +13,7 @@ import {
 import { claimFirstAdmin, getAdminIdentity } from "@/lib/admin.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { Button, Logo } from "@/components/agora/primitives";
+import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authenticated/admin")({
@@ -67,10 +68,12 @@ function AdminLayout() {
             onClick={async () => {
               const res = await claim();
               if (res.granted) void refetch();
+              else toast.error("This account is not authorised for administrator access.");
             }}
           >
             Claim administrator role
           </Button>
+
           <p className="type-caption mt-2 text-muted-foreground/60">
             Only available while no administrator exists yet.
           </p>

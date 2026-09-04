@@ -77,6 +77,10 @@ export const getAdminIdentity = createServerFn({ method: "GET" })
 export const claimFirstAdmin = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
+    const allowed = (process.env["ADMIN_EMAIL"] ?? "").trim().toLowerCase();
+    const email = String(context.claims["email"] ?? "").trim().toLowerCase();
+    if (!allowed || !email || email !== allowed) return { granted: false as const };
+
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { count } = await supabaseAdmin
       .from("user_roles")
@@ -86,6 +90,7 @@ export const claimFirstAdmin = createServerFn({ method: "POST" })
     await supabaseAdmin.from("user_roles").insert({ user_id: context.userId, role: "admin" });
     return { granted: true as const };
   });
+
 
 /* -------------------------------- overview ------------------------------ */
 
