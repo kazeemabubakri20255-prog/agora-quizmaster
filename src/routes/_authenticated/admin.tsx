@@ -13,6 +13,7 @@ import {
 import { claimFirstAdmin, getAdminIdentity } from "@/lib/admin.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { Button, Logo } from "@/components/agora/primitives";
+import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authenticated/admin")({
