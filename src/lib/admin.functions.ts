@@ -237,6 +237,8 @@ export const saveQuestion = createServerFn({ method: "POST" })
       explanation: data.explanation ?? null,
       topic: data.topic ?? null,
       subtopic: data.subtopic ?? null,
+      is_active: data.is_active ?? true,
+      position: data.position ?? 0,
       normalized_text: normalize(data.question_text),
     };
     if (data.id) {
