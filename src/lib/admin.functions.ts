@@ -141,7 +141,11 @@ export const saveQuiz = createServerFn({ method: "POST" })
   .inputValidator((raw) => quizInput.parse(raw))
   .handler(async ({ data, context }) => {
     const db = await requireAdmin(context);
-    const payload = { ...data, whatsapp_url: data.whatsapp_url || null };
+    const payload = {
+      ...data,
+      description: data.description ?? null,
+      whatsapp_url: data.whatsapp_url || null,
+    };
     if (data.id) {
       const { error } = await db.from("quizzes").update(payload).eq("id", data.id);
       if (error) throw new Error(error.message.includes("slug") ? "That slug is already in use." : "Could not save the quiz.");
@@ -226,7 +230,13 @@ export const saveQuestion = createServerFn({ method: "POST" })
   .inputValidator((raw) => questionInput.parse(raw))
   .handler(async ({ data, context }) => {
     const db = await requireAdmin(context);
-    const payload = { ...data, normalized_text: normalize(data.question_text) };
+    const payload = {
+      ...data,
+      explanation: data.explanation ?? null,
+      topic: data.topic ?? null,
+      subtopic: data.subtopic ?? null,
+      normalized_text: normalize(data.question_text),
+    };
     if (data.id) {
       await db.from("questions").update(payload).eq("id", data.id);
       return { id: data.id };
@@ -426,7 +436,8 @@ export const getSubmissionDetail = createServerFn({ method: "POST" })
   .inputValidator((raw) => z.object({ id: z.string().uuid() }).parse(raw))
   .handler(async ({ data, context }) => {
     const db = await requireAdmin(context);
-    const { data: submission } = await db.from("submissions").select("*").eq("id", data.id).single();
+    const { data: submission } = await db.from("submissions").select("*").eq("id", data.id).maybeSingle();
+    if (!submission) throw new Error("That submission could not be found.");
     const { data: session } = await db
       .from("exam_sessions")
       .select("started_at, submitted_at, status")
