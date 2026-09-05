@@ -97,10 +97,14 @@ function AdminLayout() {
               <NavLink key={item.to} {...item} pathname={pathname} />
             ))}
           </nav>
-          <Button variant="ghost" size="sm" onClick={() => void signOut()}>
-            <LogOut className="h-4 w-4" aria-hidden />
-            <span className="hidden sm:inline">Sign out</span>
-          </Button>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Button variant="ghost" size="sm" onClick={() => void signOut()}>
+              <LogOut className="h-4 w-4" aria-hidden />
+              <span className="hidden sm:inline">Sign out</span>
+            </Button>
+          </div>
+
         </div>
         <nav className="scrollbar-slim flex gap-1 overflow-x-auto px-4 pb-3 md:hidden">
           {NAV.map((item) => (
