@@ -10,7 +10,7 @@ import { markGateVisited, readGate } from "@/lib/exam-storage";
 import { cn } from "@/lib/utils";
 
 const CONTACT = "08132927734";
-const FALLBACK_CHANNEL = "https://whatsapp.com/channel/";
+const FALLBACK_CHANNEL = "https://whatsapp.com/channel/0029VbCjPlqA89MqBRDzm80Z";
 
 export const Route = createFileRoute("/")({
   loader: () => listActiveQuizzes(),
