@@ -185,7 +185,7 @@ function QuizPage() {
     return <ResultsView quizTitle={result.quizTitle} summary={result.summary} review={result.review} />;
   }
 
-  const channel = data.quiz.whatsappUrl || "https://whatsapp.com/channel/";
+  const channel = data.quiz.whatsappUrl || "https://whatsapp.com/channel/0029VbCjPlqA89MqBRDzm80Z";
 
   return (
     <Shell>
