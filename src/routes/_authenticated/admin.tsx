@@ -13,6 +13,7 @@ import {
 import { claimFirstAdmin, getAdminIdentity } from "@/lib/admin.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { Button, Logo } from "@/components/agora/primitives";
+import { ThemeToggle } from "@/components/agora/theme-toggle";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 

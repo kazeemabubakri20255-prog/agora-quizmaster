@@ -16,6 +16,7 @@ import {
 import { ExamRunner } from "@/components/quiz/exam-runner";
 import { ResultsView } from "@/components/quiz/results-view";
 import { Button, Field, Input, Logo } from "@/components/agora/primitives";
+import { ThemeToggle } from "@/components/agora/theme-toggle";
 import { clearSession, markGateVisited, readGate, readSession, writeSession } from "@/lib/exam-storage";
 import { cn } from "@/lib/utils";
 
