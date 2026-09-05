@@ -77,9 +77,13 @@ export const getAdminIdentity = createServerFn({ method: "GET" })
 export const claimFirstAdmin = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    const allowed = (process.env["ADMIN_EMAIL"] ?? "").trim().toLowerCase();
+    const allowed = (process.env["ADMIN_EMAILS"] ?? process.env["ADMIN_EMAIL"] ?? "")
+      .toLowerCase()
+      .split(",")
+      .map((e) => e.trim())
+      .filter(Boolean);
     const email = String(context.claims["email"] ?? "").trim().toLowerCase();
-    if (!allowed || !email || email !== allowed) return { granted: false as const };
+    if (!allowed.length || !email || !allowed.includes(email)) return { granted: false as const };
 
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { count } = await supabaseAdmin
