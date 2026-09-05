@@ -96,7 +96,7 @@ function AuthPage() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </Field>
-          <Field label="Password" hint={mode === "signup" ? "Minimum 8 characters" : undefined}>
+          <Field label="Password">
             <Input
               type="password"
               required
