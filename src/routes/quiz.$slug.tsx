@@ -16,6 +16,7 @@ import {
 import { ExamRunner } from "@/components/quiz/exam-runner";
 import { ResultsView } from "@/components/quiz/results-view";
 import { Button, Field, Input, Logo } from "@/components/agora/primitives";
+import { ThemeToggle } from "@/components/agora/theme-toggle";
 import { clearSession, markGateVisited, readGate, readSession, writeSession } from "@/lib/exam-storage";
 import { cn } from "@/lib/utils";
 
@@ -275,11 +276,13 @@ function Shell({ children }: { children: React.ReactNode }) {
             "radial-gradient(50% 50% at 50% 50%, color-mix(in oklch, var(--color-primary) 26%, transparent), transparent 70%)",
         }}
       />
-      <div className="relative w-full max-w-md">
+      <div className="relative flex w-full max-w-md items-center justify-between">
         <Link to="/" className="inline-flex">
           <Logo />
         </Link>
+        <ThemeToggle />
       </div>
+
       <div className="relative flex flex-1 items-center justify-center py-10">{children}</div>
     </div>
   );
