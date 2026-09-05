@@ -23,7 +23,7 @@ export const Route = createFileRoute("/auth")({
 
 function AuthPage() {
   const navigate = useNavigate();
-  const [mode, setMode] = useState<"signin" | "signup">("signin");
+  const mode = "signin" as const;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
@@ -96,7 +96,7 @@ function AuthPage() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </Field>
-          <Field label="Password" hint={mode === "signup" ? "Minimum 8 characters" : undefined}>
+          <Field label="Password">
             <Input
               type="password"
               required
@@ -116,13 +116,9 @@ function AuthPage() {
           Continue with Google
         </Button>
 
-        <button
-          type="button"
-          className="type-caption mt-5 w-full text-muted-foreground hover:text-foreground"
-          onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
-        >
-          {mode === "signin" ? "Need an account? Create one" : "Already registered? Sign in"}
-        </button>
+        <p className="type-caption mt-5 text-center text-muted-foreground/70">
+          Access is limited to the platform owner. New accounts are closed.
+        </p>
 
         <Link to="/" className="type-caption mt-4 block text-center text-muted-foreground/70 hover:text-foreground">
           Back to Agora Quiz
