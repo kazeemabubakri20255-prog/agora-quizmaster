@@ -67,10 +67,14 @@ function Landing() {
 
       <header className="relative mx-auto flex max-w-5xl items-center justify-between px-5 py-6">
         <Logo />
-        <Link to="/auth" className="type-caption text-muted-foreground hover:text-foreground">
-          Administrator
-        </Link>
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+          <Link to="/auth" className="type-caption text-muted-foreground hover:text-foreground">
+            Administrator
+          </Link>
+        </div>
       </header>
+
 
       <main className="relative mx-auto max-w-5xl px-5 pb-24">
         <section className="text-center">
