@@ -6,6 +6,7 @@ import { ArrowUpRight, Check, Clock, ListChecks, Phone, ShieldCheck } from "luci
 import heroImage from "@/assets/hero.jpg";
 import { listActiveQuizzes } from "@/lib/exam.functions";
 import { Button, Logo } from "@/components/agora/primitives";
+import { ThemeToggle } from "@/components/agora/theme-toggle";
 import { markGateVisited, readGate } from "@/lib/exam-storage";
 import { cn } from "@/lib/utils";
 
